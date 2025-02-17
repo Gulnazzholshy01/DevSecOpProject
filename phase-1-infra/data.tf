@@ -3,7 +3,7 @@ data "aws_vpc" "default" {
   default = true
 }
 
-###### User data script ######
+###### User data script for K8S cluster ######
 data "template_file" "user_data" {
   for_each = var.k8s_cluster_vms
   template = file("./extras/k8s-initial-setup.tpl")
@@ -15,3 +15,4 @@ data "template_file" "user_data" {
     k8s_cluster_version = "1.32.0-1.1"
   }
 }
+

@@ -64,3 +64,34 @@ kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 ```
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.12.0/deploy/static/provider/cloud/deploy.yaml
 ```
+
+****Step 2. Create Docker Containers for SonarQube and Nexus.****
+
+- **Step 2.1.** Create docker container for Sonarqube [Sonarqube VM]
+```
+docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
+```
+
+To connect the webpage of Sonarqube:
+1. Navigate `public_ip_sonarqube_vm:9000`
+2. After login in as admin, change password
+
+- **Step 2.2.** Create docker container for Nexus [Nexus VM]
+```
+docker run -d --name nexus -p 8081:8081 sonatype/nexus3 
+```
+To connect the webpage of Nexus:
+1. Navigate `public_ip_nexus_vm:8081`
+2. After login in as admin, change password
+
+You can get initial admin password in docker container:
+`docker exec -ti e7d346c88bb8 /bin/bash`, e7d346c88bb8 is a container ID where nexus is running
+`cat sonatype-work/nexus3/admin.password`
+
+****Step 3. Jenkins Setup****
+
+To connect the webpage of Jenkins:
+1. Navigate `public_ip_jenkins_vm:8080`
+2. After login in as admin, change password
+
+You can get initial admin password: `sudo cat /var/lib/jenkins/secrets/initialAdminPassword`
