@@ -1,6 +1,6 @@
 ***PHASE 1 - Infratructure Setup***
 
-****Step 1. Create Kubernetes cluster with kubeadm on Amazon EC2 VMs.****
+**Step 1. Create Kubernetes cluster with kubeadm on Amazon EC2 VMs.**
 
 - **Step 1.1.**  Create 1 Master and 2 Worker nodes with correct SG rules for K8S Cluster. 
 
@@ -65,7 +65,7 @@ kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.12.0/deploy/static/provider/cloud/deploy.yaml
 ```
 
-****Step 2. Create Docker Containers for SonarQube and Nexus.****
+**Step 2. Create Docker Containers for SonarQube and Nexus.**
 
 - **Step 2.1.** Create docker container for Sonarqube [Sonarqube VM]
 ```
@@ -74,7 +74,7 @@ docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
 
 To connect the webpage of Sonarqube:
 1. Navigate `public_ip_sonarqube_vm:9000`
-2. After login in as admin, change password
+2. After login in as admin, change password (initial user: admin, password: admin)
 
 - **Step 2.2.** Create docker container for Nexus [Nexus VM]
 ```
@@ -88,10 +88,13 @@ You can get initial admin password in docker container:
 `docker exec -ti e7d346c88bb8 /bin/bash`, e7d346c88bb8 is a container ID where nexus is running
 `cat sonatype-work/nexus3/admin.password`
 
-****Step 3. Jenkins Setup****
+**Step 3. Jenkins Setup**
 
 To connect the webpage of Jenkins:
 1. Navigate `public_ip_jenkins_vm:8080`
 2. After login in as admin, change password
 
 You can get initial admin password: `sudo cat /var/lib/jenkins/secrets/initialAdminPassword`
+
+*** 
+**Congratulations! Phase 1 ends here, proceed to Phase 2!**
